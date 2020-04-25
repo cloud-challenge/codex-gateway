@@ -1,0 +1,41 @@
+server:
+  port: 8885
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+---
+
+spring:
+  profiles: dev
+
+  cloud:
+    gateway:
+      routes:
+        - id: codex-catalog
+          uri: lb://codex-catalog
+          predicates:
+            - Path=/api/catalog/**
+          filters:
+            - StripPrefix=2
+        - id: codex-eureka
+          uri: http://localhost:8080/
+          predicates:
+            - Path=/eureka
+          filters:
+            - StripPrefix=1
+        - id: codex-eureka-static
+          uri: http://localhost:8080/
+          predicates:
+            - Path=/eureka/**
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8080/eureka/
