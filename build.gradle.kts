@@ -22,10 +22,15 @@ extra["springCloudVersion"] = "Hoxton.SR3"
 dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.springframework.cloud:spring-cloud-starter-gateway")
 	implementation("de.codecentric:spring-boot-admin-starter-client")
 	implementation("de.codecentric:spring-boot-admin-starter-client")
-	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client") {
+		exclude(group = "org.springframework.cloud", module = "spring-cloud-starter-netflix-ribbon")
+		exclude(group = "org.springframework.cloud", module = "spring-cloud-netflix-ribbon")
+		exclude(group = "com.netflix.ribbon", module = "ribbon-eureka")
+	}
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
