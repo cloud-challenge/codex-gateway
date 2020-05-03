@@ -10,41 +10,8 @@ management:
     health:
       show-details: always
 
----
 
 spring:
-  profiles: dev
-
-  cloud:
-    gateway:
-      routes:
-        - id: codex-catalog
-          uri: lb://codex-catalog
-          predicates:
-            - Path=/api/catalog/**
-          filters:
-            - StripPrefix=2
-        - id: codex-eureka
-          uri: http://localhost:8080/
-          predicates:
-            - Path=/eureka
-          filters:
-            - StripPrefix=1
-        - id: codex-eureka-static
-          uri: http://localhost:8080/
-          predicates:
-            - Path=/eureka/**
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8080/eureka/
-
----
-
-spring:
-  profiles: kubernetes
-
   cloud:
     gateway:
       routes:
@@ -71,4 +38,5 @@ boot:
 
 eureka:
   client:
-    serviceUrl.defaultZone: http://eureka-server:8080/eureka/
+    serviceUrl:
+      defaultZone: http://eureka-server:8080/
