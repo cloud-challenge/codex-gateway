@@ -11,4 +11,4 @@ WORKDIR /home/spring
 ADD build/libs/codex-gateway-${APP_VERSION}.jar /home/spring/app.jar
 ADD src/main/resources/* /home/spring/
 ADD script/* /home/spring/
-ENTRYPOINT ["sh", "-c", "'./run.sh'"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /home/spring/app.jar --spring.profiles.active=$SPRING_PROFILES_ACTIVE"]
