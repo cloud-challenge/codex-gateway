@@ -21,7 +21,7 @@ spring:
             - Path=/api/catalog/**
           filters:
             - StripPrefix=2
-            -
+
         - id: codex-eureka
           uri: http://eureka-server:8080/
           predicates:
