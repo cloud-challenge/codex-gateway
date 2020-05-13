@@ -57,7 +57,7 @@ spring:
         - id: codex-eureka
           uri: http://eureka-server:8080/
           predicates:
-            - Path=/eureka
+            - Path=/eureka/{segment}
           filters:
             - StripPrefix=1
         - id: codex-eureka-static
@@ -67,7 +67,7 @@ spring:
         - id: codex-admin
           uri: http://admin-server:8079/
           predicates:
-            - Path=/admin
+            - Path=/admin/{segment}
           filters:
             - StripPrefix=1
 
