@@ -65,6 +65,17 @@ spring:
           predicates:
             - Path=/eureka/**
 
+        - id: codex-admin
+          uri: http://admin-server:8079/
+          predicates:
+            - Path=/admin
+          filters:
+            - StripPrefix=1
+        - id: codex-admin-static
+          uri: http://admin-server:8079/
+          predicates:
+            - Path=/admin/**
+
 eureka:
   client:
     serviceUrl:
